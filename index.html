@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Import font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+
+    <!-- Import Icon -->
+    <script src="https://kit.fontawesome.com/6a99fa985d.js" crossorigin="anonymous"></script>
+
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Todo List</h1>
+            <form :list="list" action="" @submit.prevent="onSubmit">
+                <label for="item">項目 : </label>
+                <input id="item" type="text" v-model="list" />
+                <button v-show="!editListBoolean" type="submit" class="btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button v-show="editListBoolean" type="button" @click="updateList()" class="btn">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </form>
+            <div class="list">
+                <ul>
+                    <li v-for="(list, index) in lists">
+                        <div class="text">
+                            <p>{{list}}</p>
+                        </div>
+                        <div class="btn-container">
+                            <button type="button" @click="editList(index)" class="btn">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button type="button" :disabled='editListBoolean' @click="deleteList(index)" class="btn">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <button v-show='lists.length' type="button" class="btn btn-clear" @click='clear'>
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Javascript -->
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
